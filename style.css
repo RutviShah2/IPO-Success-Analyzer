@@ -1,0 +1,693 @@
+/* ========================================
+   IPO Success Analyzer - Modern Clean Design
+   Colors: White, Light Blue (#E3F2FD, #BBDEFB), Navy Blue (#1565C0, #0D47A1)
+   ======================================== */
+
+/* ========================================
+   GLOBAL STYLES
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main App Background - Clean White */
+.stApp {
+    background: #FFFFFF !important;
+}
+
+section[data-testid="stAppViewContainer"] {
+    background: #FFFFFF !important;
+}
+
+section[data-testid="stMain"] {
+    background: #FFFFFF !important;
+    padding: 2rem !important;
+}
+
+.main {
+    background: #FFFFFF !important;
+}
+
+.block-container {
+    padding: 2rem 3rem !important;
+    max-width: 1400px !important;
+}
+
+/* ========================================
+   SIDEBAR - COMPLETELY HIDDEN
+   ======================================== */
+
+[data-testid="stSidebar"] {
+    display: none !important;
+}
+
+[data-testid="collapsedControl"] {
+    display: none !important;
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+.header-container {
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    margin-bottom: 3rem;
+    box-shadow: 0 8px 32px rgba(13,71,161,0.2);
+}
+
+.header-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: -1px;
+    color: white !important;
+}
+
+.header-subtitle {
+    font-size: 1.3rem;
+    margin-top: 0.8rem;
+    opacity: 0.95;
+    font-weight: 400;
+    color: white !important;
+}
+
+/* ========================================
+   TABS - Modern Clean Style
+   ======================================== */
+
+.stTabs {
+    background: transparent;
+}
+
+.stTabs [data-baseweb="tab-list"] {
+    gap: 0;
+    background: #F5F5F5;
+    border-radius: 15px;
+    padding: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background: transparent;
+    border-radius: 12px;
+    padding: 1rem 2.5rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #0D47A1;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    background: #E3F2FD;
+    color: #0D47A1;
+}
+
+.stTabs [aria-selected="true"] {
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(13,71,161,0.3);
+}
+
+/* ========================================
+   SECTION TITLES
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    color: #0D47A1 !important;
+    font-weight: 700 !important;
+}
+
+h2 {
+    font-size: 2.5rem !important;
+    margin-bottom: 1.5rem !important;
+    letter-spacing: -0.5px;
+}
+
+h3 {
+    font-size: 1.5rem !important;
+    margin-bottom: 1rem !important;
+    margin-top: 2rem !important;
+}
+
+h4 {
+    font-size: 1.2rem !important;
+    margin-bottom: 0.8rem !important;
+    color: #1565C0 !important;
+}
+
+/* ========================================
+   INPUT FIELDS - Clean Modern Design
+   ======================================== */
+
+/* Labels */
+label, [data-testid="stWidgetLabel"] {
+    color: #0D47A1 !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* Number Inputs */
+.stNumberInput > div > div > input {
+    background: white !important;
+    border: 2px solid #BBDEFB !important;
+    border-radius: 12px !important;
+    padding: 1rem !important;
+    font-size: 1.1rem !important;
+    color: #0D47A1 !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+}
+
+.stNumberInput > div > div > input:focus {
+    border-color: #1565C0 !important;
+    box-shadow: 0 0 0 4px rgba(21,101,192,0.1) !important;
+    outline: none !important;
+}
+
+.stNumberInput > div > div > input:hover {
+    border-color: #1565C0 !important;
+}
+
+/* Number Input Buttons - Navy Blue */
+.stNumberInput button {
+    background: #1565C0 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+}
+
+.stNumberInput button:hover {
+    background: #0D47A1 !important;
+    transform: scale(1.05);
+}
+
+.stNumberInput button svg {
+    color: white !important;
+    fill: white !important;
+}
+
+/* Select Boxes */
+.stSelectbox > div > div {
+    background: white !important;
+    border: 2px solid #BBDEFB !important;
+    border-radius: 12px !important;
+    padding: 0.5rem !important;
+    color: #0D47A1 !important;
+    font-weight: 600 !important;
+}
+
+.stSelectbox > div > div:focus-within {
+    border-color: #1565C0 !important;
+    box-shadow: 0 0 0 4px rgba(21,101,192,0.1) !important;
+}
+
+/* Dropdown Options */
+[role="listbox"] {
+    background: white !important;
+    border: 2px solid #BBDEFB !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(13,71,161,0.15) !important;
+}
+
+[role="option"] {
+    background: white !important;
+    color: #0D47A1 !important;
+    padding: 0.8rem 1rem !important;
+    font-weight: 500 !important;
+}
+
+[role="option"]:hover {
+    background: #E3F2FD !important;
+    color: #0D47A1 !important;
+}
+
+/* Input Containers */
+div[data-baseweb="input"] {
+    background: white !important;
+    border-radius: 12px !important;
+}
+
+div[data-baseweb="input"] input {
+    background: white !important;
+    color: #0D47A1 !important;
+    font-weight: 600 !important;
+}
+
+/* ========================================
+   BUTTONS - Modern Gradient Style
+   ======================================== */
+
+.stButton > button {
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 15px !important;
+    padding: 1.2rem 3rem !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 6px 20px rgba(13,71,161,0.3) !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+}
+
+.stButton > button:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 30px rgba(13,71,161,0.4) !important;
+    background: linear-gradient(135deg, #1565C0 0%, #1976D2 100%) !important;
+}
+
+.stButton > button:active {
+    transform: translateY(-1px) !important;
+}
+
+/* ========================================
+   CARDS - Clean Modern Design
+   ======================================== */
+
+.info-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    margin: 1.5rem 0;
+    border: 2px solid #E3F2FD;
+    box-shadow: 0 4px 16px rgba(13,71,161,0.08);
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    box-shadow: 0 8px 24px rgba(13,71,161,0.12);
+    transform: translateY(-2px);
+}
+
+.info-card h3 {
+    color: #0D47A1 !important;
+    margin-top: 0 !important;
+}
+
+.info-card h4 {
+    color: #1565C0 !important;
+}
+
+.info-card p {
+    color: #0D47A1 !important;
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+/* Success Card - Light Blue/Green */
+.success-card {
+    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+    padding: 3rem;
+    border-radius: 25px;
+    text-align: center;
+    margin: 2rem 0;
+    border: 3px solid #81C784;
+    box-shadow: 0 10px 40px rgba(76,175,80,0.2);
+}
+
+.success-card .prediction-title {
+    font-size: 3rem !important;
+    font-weight: 900 !important;
+    color: #2E7D32 !important;
+    margin: 0;
+}
+
+.success-card .prediction-subtitle {
+    font-size: 1.5rem !important;
+    color: #388E3C !important;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+.success-card .confidence-badge {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    background: white;
+    margin-top: 1.5rem;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #2E7D32;
+    box-shadow: 0 4px 12px rgba(46,125,50,0.2);
+}
+
+/* Failure Card */
+.failure-card {
+    background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%);
+    padding: 3rem;
+    border-radius: 25px;
+    text-align: center;
+    margin: 2rem 0;
+    border: 3px solid #E57373;
+    box-shadow: 0 10px 40px rgba(244,67,54,0.2);
+}
+
+.failure-card .prediction-title {
+    font-size: 3rem !important;
+    font-weight: 900 !important;
+    color: #C62828 !important;
+    margin: 0;
+}
+
+.failure-card .prediction-subtitle {
+    font-size: 1.5rem !important;
+    color: #D32F2F !important;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+.failure-card .confidence-badge {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    background: white;
+    margin-top: 1.5rem;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #C62828;
+    box-shadow: 0 4px 12px rgba(198,40,40,0.2);
+}
+
+/* Metric Cards */
+.metric-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    border: 2px solid #E3F2FD;
+    box-shadow: 0 4px 16px rgba(13,71,161,0.08);
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(13,71,161,0.15);
+}
+
+.metric-value {
+    font-size: 3rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.metric-label {
+    font-size: 1.1rem;
+    color: #1565C0 !important;
+    margin-top: 0.8rem;
+    font-weight: 600;
+}
+
+/* Feature Box */
+.feature-box {
+    background: #F5F9FF;
+    padding: 1.5rem;
+    border-radius: 15px;
+    border-left: 5px solid #1565C0;
+    margin: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.feature-box:hover {
+    background: #E3F2FD;
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(21,101,192,0.15);
+}
+
+.feature-box h4 {
+    color: #0D47A1 !important;
+    margin-top: 0 !important;
+    font-size: 1.2rem !important;
+}
+
+.feature-box p {
+    color: #1565C0 !important;
+    margin: 0.5rem 0 0 0;
+    line-height: 1.6;
+}
+
+/* ========================================
+   DIVIDERS
+   ======================================== */
+
+.section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #BBDEFB, transparent);
+    margin: 3rem 0;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #BBDEFB, transparent);
+    margin: 2rem 0;
+}
+
+/* ========================================
+   ALERTS
+   ======================================== */
+
+.alert-info {
+    background: #E3F2FD;
+    padding: 1.5rem;
+    border-radius: 15px;
+    border-left: 5px solid #1565C0;
+    margin: 1.5rem 0;
+}
+
+.alert-info h4 {
+    color: #0D47A1 !important;
+    margin-top: 0 !important;
+}
+
+.alert-info p {
+    color: #1565C0 !important;
+    line-height: 1.8;
+}
+
+.alert-warning {
+    background: #FFF3E0;
+    padding: 1.5rem;
+    border-radius: 15px;
+    border-left: 5px solid #F57C00;
+    margin: 1.5rem 0;
+}
+
+.alert-warning h4 {
+    color: #E65100 !important;
+    margin-top: 0 !important;
+}
+
+.alert-warning p {
+    color: #EF6C00 !important;
+    line-height: 1.8;
+}
+
+/* ========================================
+   FILE UPLOADER
+   ======================================== */
+
+[data-testid="stFileUploader"] {
+    background: white;
+    border: 3px dashed #BBDEFB;
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+[data-testid="stFileUploader"]:hover {
+    border-color: #1565C0;
+    background: #F5F9FF;
+}
+
+/* ========================================
+   DATAFRAMES
+   ======================================== */
+
+[data-testid="stDataFrame"] {
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid #E3F2FD;
+    box-shadow: 0 4px 16px rgba(13,71,161,0.08);
+}
+
+/* ========================================
+   DOWNLOAD BUTTON
+   ======================================== */
+
+.stDownloadButton > button {
+    background: linear-gradient(135deg, #1565C0 0%, #1976D2 100%) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 15px !important;
+    padding: 1rem 2rem !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 12px rgba(21,101,192,0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+.stDownloadButton > button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(21,101,192,0.4) !important;
+}
+
+/* ========================================
+   SPINNER
+   ======================================== */
+
+.stSpinner > div {
+    border-top-color: #1565C0 !important;
+}
+
+/* ========================================
+   PLOTLY CHARTS
+   ======================================== */
+
+.js-plotly-plot {
+    border-radius: 20px !important;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(13,71,161,0.08) !important;
+}
+
+/* ========================================
+   TEXT & TYPOGRAPHY
+   ======================================== */
+
+p, span, div, label {
+    color: #0D47A1 !important;
+}
+
+.stMarkdown p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #0D47A1 !important;
+}
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F5F5F5;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #0D47A1 0%, #1565C0 100%);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #1565C0 0%, #1976D2 100%);
+}
+
+/* ========================================
+   STREAMLIT MESSAGES
+   ======================================== */
+
+.stSuccess {
+    background: #E8F5E9 !important;
+    color: #2E7D32 !important;
+    border-radius: 15px !important;
+    padding: 1rem !important;
+    border-left: 5px solid #4CAF50 !important;
+}
+
+.stError {
+    background: #FFEBEE !important;
+    color: #C62828 !important;
+    border-radius: 15px !important;
+    padding: 1rem !important;
+    border-left: 5px solid #F44336 !important;
+}
+
+.stWarning {
+    background: #FFF3E0 !important;
+    color: #E65100 !important;
+    border-radius: 15px !important;
+    padding: 1rem !important;
+    border-left: 5px solid #FF9800 !important;
+}
+
+.stInfo {
+    background: #E3F2FD !important;
+    color: #0D47A1 !important;
+    border-radius: 15px !important;
+    padding: 1rem !important;
+    border-left: 5px solid #2196F3 !important;
+}
+
+/* ========================================
+   HIDE STREAMLIT BRANDING
+   ======================================== */
+
+#MainMenu {
+    visibility: hidden;
+}
+
+footer {
+    visibility: hidden;
+}
+
+header {
+    visibility: hidden;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+    .header-title {
+        font-size: 2.5rem !important;
+    }
+    
+    .header-subtitle {
+        font-size: 1.1rem !important;
+    }
+    
+    .block-container {
+        padding: 1rem !important;
+    }
+    
+    h2 {
+        font-size: 2rem !important;
+    }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.info-card, .metric-card, .feature-box {
+    animation: fadeIn 0.6s ease;
+}
