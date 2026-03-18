@@ -115,7 +115,7 @@ def main():
     tab1, tab2, tab3 = st.tabs(["🎯 Prediction", "📊 Batch Analysis", "ℹ️ About"])
     
     with tab1:
-        st.markdown("<h2 style='text-align: center; color: #003087;'>Enter IPO Details</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align: center; color: #FFFFFF;'>Enter IPO Details</h2>", unsafe_allow_html=True)
         st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
@@ -277,21 +277,25 @@ def main():
                     mode="gauge+number+delta",
                     value=result['probability_success'] * 100,
                     domain={'x': [0, 1], 'y': [0, 1]},
-                    title={'text': "Success Probability", 'font': {'size': 24}},
-                    delta={'reference': 50, 'increasing': {'color': "green"}},
+                    title={'text': "Success Probability", 'font': {'size': 24, 'color': '#FFFFFF'}},
+                    delta={
+                        'reference': 50,
+                        'increasing': {'color': "#22C55E"},
+                        'decreasing': {'color': "#EF4444"}
+                    },
                     gauge={
-                        'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "darkblue"},
-                        'bar': {'color': "darkblue"},
-                        'bgcolor': "white",
+                        'axis': {'range': [None, 100], 'tickwidth': 1, 'tickcolor': "#FFFFFF"},
+                        'bar': {'color': "#F5F5F5"},
+                        'bgcolor': "#111111",
                         'borderwidth': 2,
-                        'bordercolor': "gray",
+                        'bordercolor': "#444444",
                         'steps': [
-                            {'range': [0, 30], 'color': '#ffcdd2'},
-                            {'range': [30, 70], 'color': '#fff9c4'},
-                            {'range': [70, 100], 'color': '#c8e6c9'}
+                            {'range': [0, 30], 'color': '#2A1414'},
+                            {'range': [30, 70], 'color': '#2A2A2A'},
+                            {'range': [70, 100], 'color': '#132A1A'}
                         ],
                         'threshold': {
-                            'line': {'color': "red", 'width': 4},
+                            'line': {'color': "#FFFFFF", 'width': 4},
                             'thickness': 0.75,
                             'value': 50
                         }
@@ -302,7 +306,7 @@ def main():
                     height=400,
                     margin=dict(l=20, r=20, t=60, b=20),
                     paper_bgcolor='rgba(0,0,0,0)',
-                    font={'color': "darkblue", 'family': "Arial"}
+                    font={'color': "#FFFFFF", 'family': "Arial"}
                 )
                 
                 st.plotly_chart(fig, use_container_width=True)
@@ -319,16 +323,27 @@ def main():
                     subscription_data,
                     x='Category',
                     y='Subscription',
-                    color='Subscription',
-                    color_continuous_scale='Viridis',
                     title='Category-wise Subscription Pattern'
+                )
+
+                fig2.update_traces(
+                    marker_color='#CFCFCF',
+                    marker_line_color='#FFFFFF',
+                    marker_line_width=1.2,
+                    texttemplate='%{y:.1f}x',
+                    textposition='outside',
+                    textfont_color='#FFFFFF'
                 )
                 
                 fig2.update_layout(
                     height=400,
                     showlegend=False,
                     paper_bgcolor='rgba(0,0,0,0)',
-                    plot_bgcolor='rgba(0,0,0,0)'
+                    plot_bgcolor='rgba(0,0,0,0)',
+                    font={'color': '#FFFFFF'},
+                    title_font={'color': '#FFFFFF', 'size': 20},
+                    xaxis=dict(showgrid=False, zeroline=False),
+                    yaxis=dict(gridcolor='rgba(255,255,255,0.15)', zeroline=False)
                 )
                 
                 st.plotly_chart(fig2, use_container_width=True)
@@ -368,7 +383,7 @@ def main():
                     """, unsafe_allow_html=True)
     
     with tab2:
-        st.markdown("<h2 style='text-align: center; color: #003087;'>Batch Analysis</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align: center; color: #FFFFFF;'>Batch Analysis</h2>", unsafe_allow_html=True)
         st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
         
         st.markdown("""
@@ -454,7 +469,7 @@ def main():
                 st.error(f"❌ Error processing file: {str(e)}")
     
     with tab3:
-        st.markdown("<h2 style='text-align: center; color: #003087;'>About the Model</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align: center; color: #FFFFFF;'>About the Model</h2>", unsafe_allow_html=True)
         st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
         
         col15, col16 = st.columns(2)
