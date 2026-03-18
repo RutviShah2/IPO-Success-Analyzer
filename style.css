@@ -691,3 +691,422 @@ header {
 .info-card, .metric-card, .feature-box {
     animation: fadeIn 0.6s ease;
 }
+
+/* ========================================
+   DARK UI OVERRIDES (BLACK + WHITE)
+   ======================================== */
+
+/* Global black background */
+.stApp,
+section[data-testid="stAppViewContainer"],
+section[data-testid="stMain"],
+.main,
+.block-container {
+    background: #000000 !important;
+}
+
+/* Global readable white text */
+html, body,
+h1, h2, h3, h4, h5, h6,
+p, span, div, label,
+.stMarkdown p,
+[data-testid="stWidgetLabel"] {
+    color: #FFFFFF !important;
+}
+
+/* Keep interactive controls readable in dark mode */
+.stTabs [data-baseweb="tab-list"] {
+    background: #111111 !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    color: #FFFFFF !important;
+}
+
+.stNumberInput > div > div > input,
+.stSelectbox > div > div,
+div[data-baseweb="input"],
+div[data-baseweb="input"] input,
+[role="listbox"],
+[role="option"],
+[data-testid="stFileUploader"],
+.info-card,
+.metric-card,
+.feature-box,
+.alert-info,
+.alert-warning {
+    background: #111111 !important;
+    color: #FFFFFF !important;
+}
+
+/* Preserve borders with subtle dark-theme contrast */
+.stNumberInput > div > div > input,
+.stSelectbox > div > div,
+[role="listbox"],
+[data-testid="stFileUploader"],
+.info-card,
+.metric-card,
+[data-testid="stDataFrame"] {
+    border-color: #333333 !important;
+}
+
+/* Improve divider visibility on black */
+.section-divider,
+hr {
+    background: linear-gradient(90deg, transparent, #555555, transparent) !important;
+}
+
+/* Remove remaining blue accents: monochrome only */
+.header-container {
+    background: linear-gradient(135deg, #111111 0%, #1A1A1A 100%) !important;
+    box-shadow: 0 8px 32px rgba(255,255,255,0.08) !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover,
+.stTabs [aria-selected="true"] {
+    background: #222222 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 12px rgba(255,255,255,0.12) !important;
+}
+
+.stButton > button,
+.stButton > button:hover,
+.stDownloadButton > button,
+.stDownloadButton > button:hover {
+    background: #1F1F1F !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 6px 20px rgba(255,255,255,0.12) !important;
+}
+
+.metric-value {
+    background: linear-gradient(135deg, #FFFFFF 0%, #CFCFCF 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+.metric-label,
+.feature-box h4,
+.feature-box p,
+.info-card p,
+.info-card h3,
+.info-card h4,
+.alert-info h4,
+.alert-info p,
+.stInfo {
+    color: #FFFFFF !important;
+}
+
+.alert-info,
+.stInfo {
+    background: #111111 !important;
+    border-left-color: #666666 !important;
+}
+
+::-webkit-scrollbar-track {
+    background: #111111 !important;
+}
+
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover {
+    background: #5A5A5A !important;
+}
+
+/* Ensure +/- symbols are monochrome (no blue) */
+.stNumberInput button,
+.stNumberInput button:hover,
+.stNumberInput button:focus,
+.stNumberInput button:active {
+    background: #1F1F1F !important;
+    color: #FFFFFF !important;
+    border: 1px solid #444444 !important;
+}
+
+.stNumberInput button svg,
+.stNumberInput button svg path,
+.stNumberInput button svg line,
+.stNumberInput button [data-testid="stIconMaterial"] {
+    color: #FFFFFF !important;
+    fill: #FFFFFF !important;
+    stroke: #FFFFFF !important;
+}
+
+/* Fix selectbox selected text visibility on dark background */
+.stSelectbox div[data-baseweb="select"] > div,
+.stSelectbox div[data-baseweb="select"] span,
+.stSelectbox div[data-baseweb="select"] input,
+.stSelectbox div[data-baseweb="select"] div,
+.stSelectbox [data-testid="stMarkdownContainer"] p {
+    color: #FFFFFF !important;
+}
+
+.stSelectbox svg,
+.stSelectbox svg path {
+    color: #FFFFFF !important;
+    fill: #FFFFFF !important;
+}
+
+/* ========================================
+   PRODUCTION DARK THEME CONSISTENCY
+   ======================================== */
+
+:root {
+    --bg-0: #222222;
+    --bg-1: #282828;
+    --bg-2: #2F2F2F;
+    --bg-3: #383838;
+    --text-0: #FFFFFF;
+    --text-1: #E8E8E8;
+    --text-2: #C9C9C9;
+    --border-0: #353535;
+    --border-1: #4A4A4A;
+    --shadow-0: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* App shell */
+.stApp,
+section[data-testid="stAppViewContainer"],
+section[data-testid="stMain"],
+.main,
+.block-container {
+    background: var(--bg-0) !important;
+    color: var(--text-0) !important;
+}
+
+/* Header */
+.header-container {
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08), transparent 35%),
+        linear-gradient(145deg, var(--bg-1), var(--bg-2)) !important;
+    border: 1px solid var(--border-0) !important;
+    box-shadow: var(--shadow-0) !important;
+}
+
+.header-title,
+.header-subtitle {
+    color: var(--text-0) !important;
+}
+
+/* Typography */
+html, body,
+h1, h2, h3, h4, h5, h6,
+p, span, div, label,
+.stMarkdown p,
+[data-testid="stWidgetLabel"] {
+    color: var(--text-0) !important;
+}
+
+/* Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    background: var(--bg-1) !important;
+    border: 1px solid var(--border-0) !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    color: var(--text-1) !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover,
+.stTabs [aria-selected="true"] {
+    background: var(--bg-3) !important;
+    color: var(--text-0) !important;
+}
+
+/* Inputs and select boxes */
+.stNumberInput > div > div > input,
+.stTextInput > div > div > input,
+.stTextArea textarea,
+.stSelectbox > div > div,
+div[data-baseweb="input"],
+div[data-baseweb="input"] input,
+.stSelectbox div[data-baseweb="select"] > div,
+.stSelectbox div[data-baseweb="select"] span,
+.stSelectbox div[data-baseweb="select"] input,
+.stSelectbox div[data-baseweb="select"] div {
+    background: var(--bg-2) !important;
+    color: var(--text-0) !important;
+    border-color: var(--border-1) !important;
+}
+
+.stNumberInput > div > div > input:focus,
+.stTextInput > div > div > input:focus,
+.stTextArea textarea:focus,
+.stSelectbox > div > div:focus-within {
+    border-color: #7A7A7A !important;
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.16) !important;
+}
+
+/* Number steppers */
+.stNumberInput button,
+.stNumberInput button:hover,
+.stNumberInput button:focus,
+.stNumberInput button:active {
+    background: var(--bg-3) !important;
+    color: var(--text-0) !important;
+    border: 1px solid var(--border-1) !important;
+}
+
+.stNumberInput button svg,
+.stNumberInput button svg path,
+.stNumberInput button svg line,
+.stNumberInput button [data-testid="stIconMaterial"] {
+    color: var(--text-0) !important;
+    fill: var(--text-0) !important;
+    stroke: var(--text-0) !important;
+}
+
+/* Select dropdown menu */
+[role="listbox"] {
+    background: var(--bg-2) !important;
+    border: 1px solid var(--border-1) !important;
+    box-shadow: var(--shadow-0) !important;
+}
+
+[role="option"] {
+    background: var(--bg-2) !important;
+    color: var(--text-0) !important;
+}
+
+[role="option"]:hover,
+[aria-selected="true"][role="option"] {
+    background: var(--bg-3) !important;
+    color: var(--text-0) !important;
+}
+
+.stSelectbox svg,
+.stSelectbox svg path {
+    color: var(--text-0) !important;
+    fill: var(--text-0) !important;
+}
+
+/* Buttons */
+.stButton > button,
+.stDownloadButton > button {
+    background: linear-gradient(145deg, #232323, #161616) !important;
+    color: var(--text-0) !important;
+    border: 1px solid var(--border-1) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.45) !important;
+}
+
+.stButton > button:hover,
+.stDownloadButton > button:hover {
+    background: #2A2A2A !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Cards and feature blocks */
+.info-card,
+.metric-card,
+.feature-box,
+.alert-info,
+.alert-warning {
+    background: linear-gradient(145deg, #141414, #101010) !important;
+    border: 1px solid var(--border-0) !important;
+    color: var(--text-0) !important;
+    box-shadow: var(--shadow-0) !important;
+}
+
+.info-card h3,
+.info-card h4,
+.info-card p,
+.feature-box h4,
+.feature-box p,
+.metric-label {
+    color: var(--text-0) !important;
+}
+
+.feature-box {
+    border-left: 4px solid #7A7A7A !important;
+}
+
+.feature-box:hover,
+.metric-card:hover,
+.info-card:hover {
+    background: #1A1A1A !important;
+}
+
+/* KPI values */
+.metric-value {
+    background: linear-gradient(180deg, #FFFFFF 0%, #BFBFBF 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+/* Results cards keep semantic accents but dark-friendly */
+.success-card {
+    background: linear-gradient(135deg, #102015 0%, #0D1710 100%) !important;
+    border-color: #1E7A3D !important;
+}
+
+.success-card .prediction-title,
+.success-card .prediction-subtitle,
+.success-card .confidence-badge {
+    color: #D2F8DE !important;
+}
+
+.success-card .confidence-badge {
+    background: rgba(20, 45, 28, 0.9) !important;
+    border: 1px solid #1E7A3D !important;
+}
+
+.failure-card {
+    background: linear-gradient(135deg, #2A1212 0%, #1A1010 100%) !important;
+    border-color: #A04444 !important;
+}
+
+.failure-card .prediction-title,
+.failure-card .prediction-subtitle,
+.failure-card .confidence-badge {
+    color: #FFD9D9 !important;
+}
+
+.failure-card .confidence-badge {
+    background: rgba(46, 20, 20, 0.9) !important;
+    border: 1px solid #A04444 !important;
+}
+
+/* Uploader and dataframe */
+[data-testid="stFileUploader"] {
+    background: var(--bg-1) !important;
+    border: 2px dashed #5F5F5F !important;
+}
+
+[data-testid="stFileUploader"]:hover {
+    background: var(--bg-2) !important;
+    border-color: #8A8A8A !important;
+}
+
+[data-testid="stDataFrame"] {
+    border: 1px solid var(--border-0) !important;
+    background: var(--bg-1) !important;
+}
+
+/* Streamlit alerts */
+.stSuccess,
+.stError,
+.stWarning,
+.stInfo {
+    color: #FFFFFF !important;
+    border-left-width: 4px !important;
+}
+
+.stSuccess { background: #112018 !important; border-left-color: #2F9E5F !important; }
+.stError { background: #2A1414 !important; border-left-color: #C95E5E !important; }
+.stWarning { background: #2A2314 !important; border-left-color: #D1A146 !important; }
+.stInfo { background: #161616 !important; border-left-color: #7A7A7A !important; }
+
+/* Divider and scrollbar */
+.section-divider,
+hr {
+    background: linear-gradient(90deg, transparent, #6A6A6A, transparent) !important;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-1) !important;
+}
+
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover {
+    background: #606060 !important;
+}
