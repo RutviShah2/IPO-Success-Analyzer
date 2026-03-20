@@ -24,7 +24,6 @@ MONTH_OPTIONS = [
     (11, "November"),
     (12, "December"),
 ]
-MONTH_LABEL_TO_NUMBER = {label: number for number, label in MONTH_OPTIONS}
 
 
 st.set_page_config(
@@ -124,9 +123,11 @@ def _get_sector_options(metadata) -> list[str]:
     if metadata:
         sector_values.extend(metadata.get("sectors", []))
 
+    dataset_path = metadata.get("dataset", "_ipo_success_predictor.csv") if metadata else "_ipo_success_predictor.csv"
     try:
-        dataset = pd.read_csv("synthetic_ipo_dataset.csv", usecols=["Sector"])
-        sector_values.extend(dataset["Sector"].dropna().tolist())
+        dataset = pd.read_csv(dataset_path)
+        if "Sector" in dataset.columns:
+            sector_values.extend(dataset["Sector"].dropna().tolist())
     except Exception:
         pass
 
@@ -134,25 +135,6 @@ def _get_sector_options(metadata) -> list[str]:
     cleaned = [value for value in cleaned if value]
     options = sorted(set(cleaned))
     return options if options else ["Unknown"]
-
-
-def _get_default_month_label() -> str:
-    current_month = datetime.now().month
-    return MONTH_OPTIONS[current_month - 1][1]
-
-
-def _initialize_selection_state(sectors: list[str]) -> None:
-    if "selected_month_label" not in st.session_state:
-        st.session_state.selected_month_label = _get_default_month_label()
-
-    if "selected_sector" not in st.session_state:
-        st.session_state.selected_sector = sectors[0]
-
-    if st.session_state.selected_month_label not in MONTH_LABEL_TO_NUMBER:
-        st.session_state.selected_month_label = _get_default_month_label()
-
-    if st.session_state.selected_sector not in sectors:
-        st.session_state.selected_sector = sectors[0]
 
 
 def _render_investor_demand_charts(qib: float, hni: float, rii: float) -> None:
@@ -235,7 +217,6 @@ def main():
         """
         <div class="header-container">
             <h1 class="header-title">📈 IPO Success Analyzer</h1>
-            <p class="header-subtitle">Fresh Multi-Model Pipeline On synthetic_ipo_dataset.csv</p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -247,50 +228,25 @@ def main():
         return
 
     sectors = _get_sector_options(metadata)
-    _initialize_selection_state(sectors)
-
     tab1, tab2, tab3 = st.tabs(["Prediction", "Batch Analysis", "About"])
 
     with tab1:
         st.markdown("## Enter IPO Details")
 
-        col1, col2, col3 = st.columns(3)
+        col1, col2 = st.columns(2)
         with col1:
             offer_price = st.number_input("Offer Price", min_value=1.0, value=500.0, step=10.0)
             total_shares = st.number_input("Total Shares", min_value=1.0, value=1_000_000.0, step=50_000.0)
             proceeds_total = st.number_input("Proceeds Total", min_value=1.0, value=500_000_000.0, step=10_000_000.0)
+            year = st.number_input("Year", min_value=2010, max_value=2035, value=datetime.now().year, step=1)
 
         with col2:
-            year = st.number_input("Year", min_value=2010, max_value=2035, value=datetime.now().year, step=1)
-            month_label = st.selectbox(
-                "Month",
-                options=[label for _, label in MONTH_OPTIONS],
-                index=[label for _, label in MONTH_OPTIONS].index(st.session_state.selected_month_label),
-                key="selected_month_label",
-            )
-            month = MONTH_LABEL_TO_NUMBER[month_label]
+            month = datetime.now().month
             quarter = (month - 1) // 3 + 1
-            sector = st.selectbox(
-                "Sector",
-                options=sectors,
-                index=sectors.index(st.session_state.selected_sector),
-                key="selected_sector",
-                help="Sector list is auto-loaded from model metadata and dataset.",
-            )
-
-            st.caption(f"Selected Month: {month_label} | Selected Sector: {sector}")
-
-        with col3:
+            sector = sectors[0]
             qib = st.number_input("QIB Shares", min_value=0.0, value=450_000.0, step=10_000.0)
             hni = st.number_input("HNI Shares", min_value=0.0, value=300_000.0, step=10_000.0)
             rii = st.number_input("RII Shares", min_value=0.0, value=250_000.0, step=10_000.0)
-
-        total_demand = qib + hni + rii
-        demand_multiple = (total_demand / total_shares) if total_shares > 0 else 0.0
-        st.info(
-            f"Derived Demand Multiple (Total Subscription): {demand_multiple:.2f}x | "
-            f"Quarter: Q{int(quarter)}"
-        )
 
         if st.button("Predict IPO Success", use_container_width=True):
             ipo_data = {
