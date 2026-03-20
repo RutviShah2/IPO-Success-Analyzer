@@ -54,6 +54,7 @@ LEGACY_COLUMN_ALIASES = {
     "QIB(Qualified Institutional Buyers)": "QIB",
     "HNI(High Net-Worth Individuals)": "HNI",
     "RII(Retail Individual Investors)": "RII",
+    "Issue_Size": "Proceeds_Total",
 }
 
 
@@ -72,6 +73,15 @@ def normalize_columns(df: pd.DataFrame) -> pd.DataFrame:
 
     if "Quarter" not in normalized.columns and "Month" in normalized.columns:
         normalized["Quarter"] = ((pd.to_numeric(normalized["Month"], errors="coerce") - 1) // 3) + 1
+
+    if "Year" not in normalized.columns or normalized["Year"].isna().all():
+        normalized["Year"] = 2026
+
+    if "Month" not in normalized.columns or normalized["Month"].isna().all():
+        normalized["Month"] = 1
+
+    if "Quarter" not in normalized.columns or normalized["Quarter"].isna().all():
+        normalized["Quarter"] = 1
 
     return normalized
 
