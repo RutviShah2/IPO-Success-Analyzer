@@ -1110,3 +1110,44 @@ hr {
 ::-webkit-scrollbar-thumb:hover {
     background: #606060 !important;
 }
+
+/* ========================================
+   FINAL SELECTBOX VISIBILITY FIX
+   ======================================== */
+
+/* Ensure selected value text never becomes transparent */
+.stSelectbox div[data-baseweb="select"] *,
+div[data-baseweb="popover"] [role="listbox"] *,
+div[data-baseweb="select"] * {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    opacity: 1 !important;
+}
+
+/* Keep control and menu surfaces dark for contrast */
+.stSelectbox div[data-baseweb="select"] > div,
+div[data-baseweb="popover"] [role="listbox"] {
+    background: #2B2B2B !important;
+    border: 1px solid #595959 !important;
+}
+
+/* Make hovered and selected options clearly visible */
+div[data-baseweb="popover"] [role="option"] {
+    background: #2B2B2B !important;
+    color: #FFFFFF !important;
+}
+
+div[data-baseweb="popover"] [role="option"][aria-selected="true"],
+div[data-baseweb="popover"] [role="option"]:hover {
+    background: #444444 !important;
+    color: #FFFFFF !important;
+}
+
+/* BaseWeb selected value and placeholder text */
+.stSelectbox div[data-baseweb="select"] [aria-hidden="true"],
+.stSelectbox div[data-baseweb="select"] div,
+.stSelectbox div[data-baseweb="select"] span {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    opacity: 1 !important;
+}
