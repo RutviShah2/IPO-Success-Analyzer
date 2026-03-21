@@ -1,53 +1,63 @@
 # IPO Success Analyzer
 
-Fresh Streamlit + machine learning project rebuilt on the final dataset `_ipo_success_predictor.csv`.
+IPO Success Analyzer is a Streamlit app that predicts whether an IPO is likely to have a positive listing outcome, using a tuned Random Forest pipeline trained on `_ipo_success_predictor.csv`.
 
-## What Changed
+## Features
 
-- Old cleaned dataset dependency removed.
-- New full training pipeline added for the final dataset.
-- Training now uses a single tuned Random Forest model for maximum practical accuracy.
-- App inference updated to use the new schema and saved best pipeline.
+- Single IPO prediction with confidence and probability breakdown.
+- Batch CSV prediction with downloadable results.
+- Automatic feature engineering for subscription demand, ratios, seasonality, and proceeds transformations.
+- Model metadata display in-app (accuracy, CV performance, training date, and feature count).
 
 ## Project Structure
 
 ```text
 IPO-Success-Analyzer/
-|-- app.py
-|-- ml_pipeline.py
-|-- retrain_model.py
-|-- style.css
-|-- _ipo_success_predictor.csv
-|-- ipo_success_model.pkl
-|-- scaler.pkl
-|-- imputer.pkl
-|-- feature_columns.pkl
-|-- model_metadata.pkl
-|-- README.md
+|- app.py
+|- ml_pipeline.py
+|- retrain_model.py
+|- style.css
+|- _ipo_success_predictor.csv
+|- ipo_success_model.pkl
+|- feature_columns.pkl
+|- model_metadata.pkl
+|- scaler.pkl
+|- imputer.pkl
+|- README.md
 ```
+
+## Tech Stack
+
+- Python
+- Streamlit
+- pandas, numpy
+- scikit-learn
+- scipy
+- plotly
+- joblib
 
 ## Setup
 
 ```bash
 python -m venv .venv
 .\.venv\Scripts\activate
-pip install streamlit pandas numpy scikit-learn joblib plotly
+pip install streamlit pandas numpy scikit-learn scipy joblib plotly
 ```
 
-## Retrain The Model
+## Train / Retrain Model
 
-Run this whenever dataset or logic changes:
+Run training whenever dataset content or feature logic changes:
 
 ```bash
 python retrain_model.py
 ```
 
-This command regenerates:
-- `ipo_success_model.pkl` (best model pipeline)
-- `scaler.pkl`
-- `imputer.pkl`
+Artifacts generated:
+
+- `ipo_success_model.pkl` (full fitted pipeline)
 - `feature_columns.pkl`
 - `model_metadata.pkl`
+- `scaler.pkl` and `imputer.pkl` (kept for compatibility in app loading)
 
 ## Run The App
 
@@ -55,25 +65,44 @@ This command regenerates:
 streamlit run app.py
 ```
 
-## Dataset Target Definition
+## Input Schema
 
-During training:
-- `Success = 1` when `Ipo_Success > 0` (primary)
-- fallback supported: `Listing_Gain > 0`
-
-## Required Batch Input Columns
+Core input fields:
 
 - `Offer_Price`
 - `Total_Shares`
 - `QIB`
 - `HNI`
 - `RII`
-- `Issue_Size` or `Proceeds_Total`
+- `Proceeds_Total` (legacy alias `Issue_Size` is also supported)
 - `Sector`
-- and either:
-  - `Year`, `Month`, `Quarter`
-  - or `Listing_Date`
+
+Date fields:
+
+- Provide either `Year`, `Month`, `Quarter`
+- Or provide `Listing_Date` (the app/pipeline derives date parts automatically)
+
+Legacy column names are normalized in `ml_pipeline.py`, so older CSVs can still work if they map to supported aliases.
+
+## Target Definition
+
+Training target is resolved from available columns in this order:
+
+1. `Listing_Gain > 0`
+2. `Ipo_Success > 0` (also supports `Ipo_Sucess` and `IPOSuccess` variants)
+
+Positive condition maps to class `1` (Success), otherwise class `0` (Failure).
+
+## Batch Prediction CSV Notes
+
+- Upload CSV in the **Batch Analysis** tab.
+- Output includes original columns plus:
+  - `Prediction`
+  - `Success_Probability`
+  - `Failure_Probability`
+  - `Confidence`
+- Results can be downloaded directly from the app.
 
 ## Disclaimer
 
-This project is for educational use only and does not provide investment advice.
+This project is for educational and informational purposes only and does not constitute financial or investment advice.
