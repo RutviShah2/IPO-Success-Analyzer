@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>IPO Trends &amp; Timeline</title>
+  <meta name="description" content="Explore IPO lifecycle timelines, sector trends, and listing gain analysis. Historical IPO performance and trends."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+{% include "navbar.html" %}
+
+<div class="container" style="max-width:1060px;">
+  <header>
+    <div class="badge">Dataset Analytics · IPO Timeline</div>
+    <h1>IPO Trends &amp; Timeline</h1>
+    <p>Explore patterns, timelines, and sector-wise performance across our IPO dataset.</p>
+  </header>
+
+  <!-- Stat Strip -->
+  <div class="stat-strip" id="stat-strip">
+    <div class="stat-item"><span class="stat-val" id="s-total">—</span><span class="stat-lbl">Total IPOs</span></div>
+    <div class="stat-item"><span class="stat-val" id="s-success">—</span><span class="stat-lbl">Successful</span></div>
+    <div class="stat-item"><span class="stat-val" id="s-fail">—</span><span class="stat-lbl">Failed</span></div>
+    <div class="stat-item"><span class="stat-val" id="s-avg-total">—</span><span class="stat-lbl">Avg Total Sub (×)</span></div>
+  </div>
+
+  <!-- IPO Lifecycle Timeline Section -->
+  <div class="card">
+    <h2><span class="dot"></span>IPO Lifecycle Timeline</h2>
+    <p class="info-text" style="margin-bottom:20px;">Every IPO follows a structured lifecycle from opening to listing. Here's how the timeline works:</p>
+    <div class="timeline-lifecycle">
+      <div class="timeline-stage">
+        <div class="tl-icon">📅</div>
+        <div class="tl-stage-name">IPO Opens</div>
+        <div class="tl-desc">Subscription window opens for investors to apply for shares.</div>
+        <div class="tl-day">Day 0</div>
+      </div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-stage">
+        <div class="tl-icon">🔒</div>
+        <div class="tl-stage-name">IPO Closes</div>
+        <div class="tl-desc">Subscription window closes. No new applications accepted.</div>
+        <div class="tl-day">Day 3</div>
+      </div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-stage">
+        <div class="tl-icon">🎫</div>
+        <div class="tl-stage-name">Allotment</div>
+        <div class="tl-desc">Shares are allotted to successful applicants via lottery/pro-rata.</div>
+        <div class="tl-day">Day 7</div>
+      </div>
+      <div class="timeline-connector"></div>
+      <div class="timeline-stage">
+        <div class="tl-icon">📈</div>
+        <div class="tl-stage-name">Listing Day</div>
+        <div class="tl-desc">Shares list on NSE/BSE. First trading day — listing price revealed.</div>
+        <div class="tl-day">Day 10</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent IPO Timelines -->
+  <div class="card">
+    <h2><span class="dot"></span>Recent IPO Activity</h2>
+    <div class="timeline-cards" id="timeline-cards">
+      <div class="listings-loading"><div class="loader"></div><span>Loading timeline...</span></div>
+    </div>
+  </div>
+
+  <!-- Success Rate Chart -->
+  <div class="card">
+    <h2><span class="dot"></span>IPO Success Rate by Period</h2>
+    <p class="info-text" style="margin-bottom:18px;">Dataset rows grouped into 10 equal periods showing how success rate varies across the dataset.</p>
+    <div style="position:relative;height:280px;">
+      <canvas id="successRateChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Total Subscription Trend -->
+  <div class="card">
+    <h2><span class="dot"></span>Average Total Subscription Trend</h2>
+    <p class="info-text" style="margin-bottom:18px;">Higher subscription multiples generally correlate with stronger listing gains.</p>
+    <div style="position:relative;height:280px;">
+      <canvas id="totalSubChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Sector-wise Performance -->
+  <div class="card">
+    <h2><span class="dot"></span>Sector-wise Success Performance</h2>
+    <div style="position:relative;height:300px;">
+      <canvas id="sectorPerfChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Avg Subscriptions comparison -->
+  <div class="card">
+    <h2><span class="dot"></span>Average Subscription by Category</h2>
+    <div style="position:relative;height:260px;">
+      <canvas id="avgSubChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Success vs Fail Donut -->
+  <div class="card" style="max-width:420px;margin:0 auto 22px;">
+    <h2><span class="dot"></span>Success vs Fail Distribution</h2>
+    <div style="position:relative;height:260px;">
+      <canvas id="donutChart"></canvas>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>IPO Success Predictor · B.Tech Data Science Project</p>
+</footer>
+
+<script src="/static/trends.js"></script>
+<script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Prediction History – IPO Predictor</title>
+  <meta name="description" content="View your IPO prediction history. Track past predictions, compare results, and re-run analysis."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+
+{% include "navbar.html" %}
+
+<div class="container">
+  <header>
+    <div class="badge">Logged in as {{ user }}</div>
+    <h1>My Prediction History</h1>
+    <p>Review your past IPO predictions, compare results, and re-run analysis on previous entries.</p>
+  </header>
+
+  <!-- Actions bar -->
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;">
+    <span class="info-text" id="history-count">Loading history...</span>
+    <div style="display:flex;gap:10px;">
+      <button class="btn-outline" style="padding:8px 18px;cursor:pointer;font-size:.85rem;" onclick="clearAllHistory()">🗑️ Clear All</button>
+      <a href="/predictor" class="btn-predict" style="width:auto;padding:9px 20px;text-decoration:none;display:inline-block;margin-top:0;font-size:.88rem;">+ New Prediction</a>
+    </div>
+  </div>
+
+  <!-- History Table Card -->
+  <div class="card" id="history-card">
+    <div id="history-loading" class="listings-loading" style="padding:30px 0;">
+      <div class="loader"></div>
+      <span>Loading prediction history...</span>
+    </div>
+    <div id="history-empty" style="display:none;text-align:center;padding:40px 20px;">
+      <div style="font-size:3rem;margin-bottom:12px;">📭</div>
+      <h3 style="margin-bottom:8px;">No predictions yet</h3>
+      <p class="info-text" style="margin-bottom:20px;">Make your first prediction using the IPO Predictor!</p>
+      <a href="/predictor" class="btn-predict" style="width:auto;padding:11px 24px;text-decoration:none;display:inline-block;margin-top:0;">🔍 Try Predictor</a>
+    </div>
+    <div id="history-table-wrap" style="display:none;">
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>IPO Name</th>
+            <th>Offer Price</th>
+            <th>Prediction</th>
+            <th>Success Prob</th>
+            <th>Risk Level</th>
+            <th>Confidence</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="history-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>IPO Success Predictor · B.Tech Data Science Project</p>
+</footer>
+
+<script src="/static/history.js"></script>
+<script src="/static/script.js"></script>
+</body>
+</html>

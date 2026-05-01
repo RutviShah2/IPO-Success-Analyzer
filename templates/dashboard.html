@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>IPO Analytics Dashboard</title>
+  <meta name="description"
+    content="Interactive IPO analytics dashboard. Explore sector performance, subscription trends, risk distribution and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+  {% include "navbar.html" %}
+
+  <div class="container" style="max-width:1100px;">
+    <header>
+      <h1>IPO Analytics Dashboard</h1>
+      <p>Explore IPO trends, sector performance, subscription patterns, and prediction insights.</p>
+    </header>
+
+    <!-- Summary Cards -->
+    <div class="stat-strip" id="dash-stat-strip">
+      <div class="stat-item">
+        <span class="stat-val" id="d-total">—</span>
+        <span class="stat-lbl">Total IPOs</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val" id="d-avg-prob">—</span>
+        <span class="stat-lbl">Avg Success Prob</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val" style="font-size:1rem;" id="d-best-sec">—</span>
+        <span class="stat-lbl">Best Performing Sector</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-val" style="font-size:.8rem;" id="d-top-lgc">—</span>
+        <span class="stat-lbl">Top Listing Gain Category</span>
+      </div>
+    </div>
+
+    <!-- Row 1: Pie + Sector Bar -->
+    <div class="dash-row-2">
+      <div class="card dash-chart-card">
+        <h2><span class="dot"></span>IPO Success vs Failure</h2>
+        <div style="position:relative;height:260px;">
+          <canvas id="piChart"></canvas>
+        </div>
+      </div>
+      <div class="card dash-chart-card" style="flex:2;">
+        <h2><span class="dot"></span>Sector-wise IPO Success</h2>
+        <div style="position:relative;height:260px;">
+          <canvas id="sectorBarChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: Subscription Comparison + Most Subscribed -->
+    <div class="dash-row-2">
+      <div class="card dash-chart-card">
+        <h2><span class="dot"></span>Avg QIB vs HNI vs RII</h2>
+        <div style="position:relative;height:250px;">
+          <canvas id="subCompareChart"></canvas>
+        </div>
+      </div>
+      <div class="card dash-chart-card" style="flex:2;">
+        <h2><span class="dot"></span>Most Subscribed IPOs</h2>
+        <div style="position:relative;height:250px;">
+          <canvas id="mostSubChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3: Highest Prob IPOs + Listing Gain Distribution -->
+    <div class="dash-row-2">
+      <div class="card dash-chart-card" style="flex:2;">
+        <h2><span class="dot"></span>Highest Probability IPOs</h2>
+        <div style="position:relative;height:250px;">
+          <canvas id="highProbChart"></canvas>
+        </div>
+      </div>
+      <div class="card dash-chart-card">
+        <h2><span class="dot"></span>Listing Gain Distribution</h2>
+        <div style="position:relative;height:250px;">
+          <canvas id="lgcDistChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 4: Avg Listing Gain by Sector + Recent Trend Line -->
+    <div class="dash-row-2">
+      <div class="card dash-chart-card">
+        <h2><span class="dot"></span>Avg Success Prob by Sector</h2>
+        <div style="position:relative;height:250px;">
+          <canvas id="lgcSectorChart"></canvas>
+        </div>
+      </div>
+      <div class="card dash-chart-card" style="flex:2;">
+        <h2><span class="dot"></span>Recent IPO Trends (Monthly)</h2>
+        <div style="position:relative;height:250px;">
+          <canvas id="recentTrendChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 5: Risk + Confidence + Feature Importance -->
+    <div class="dash-row-3">
+      <div class="card dash-chart-card">
+        <h2><span class="dot"></span>Risk Level Distribution</h2>
+        <div style="position:relative;height:220px;">
+          <canvas id="riskChart"></canvas>
+        </div>
+      </div>
+      <div class="card dash-chart-card">
+        <h2><span class="dot"></span>Confidence Distribution</h2>
+        <div style="position:relative;height:220px;">
+          <canvas id="confChart"></canvas>
+        </div>
+      </div>
+      <div class="card dash-chart-card" style="flex:2;">
+        <h2><span class="dot"></span>Feature Importance (Model Coefficients)</h2>
+        <div style="position:relative;height:220px;">
+          <canvas id="featureChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/static/dashboard.js"></script>
+  <script src="/static/script.js"></script>
+</body>
+
+</html>
