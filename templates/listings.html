@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>IPO Listings – Browse &amp; Filter</title>
+  <meta name="description"
+    content="Browse all IPO listings. Search, filter by sector, listing gain category and success probability. View IPO details and compare." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    .status-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+    .status-tab  {
+      padding:8px 18px; border-radius:8px; font-size:.84rem; font-weight:700;
+      cursor:pointer; border:1.5px solid var(--border);
+      background:var(--card); color:var(--muted); transition:all .2s;
+    }
+    .status-tab:hover { border-color:var(--accent); color:var(--text); }
+    .status-tab.active { color:#fff; border-color:transparent; }
+    .tab-all.active      { background:var(--accent); }
+    .tab-upcoming.active { background:#3b82f6; }
+    .tab-open.active     { background:#10b981; }
+    .tab-closed.active   { background:#f97316; }
+    .tab-listed.active   { background:#8b5cf6; }
+    .tab-count { background:rgba(255,255,255,.15); border-radius:10px; padding:1px 7px; font-size:.73rem; margin-left:4px; }
+  </style>
+</head>
+
+<body>
+
+  {% include "navbar.html" %}
+
+  <div class="container" style="max-width:1100px;">
+    <header>
+      <h1>IPO Listings</h1>
+      <p>Browse, search, and filter IPO listings. View detailed analysis and predictions for each IPO.</p>
+    </header>
+
+    <!-- Status Tabs -->
+    <div class="status-tabs">
+      <button class="status-tab tab-all active"      onclick="setTab('all')"     id="tab-all">All IPOs <span class="tab-count" id="cnt-all">—</span></button>
+      <button class="status-tab tab-upcoming"        onclick="setTab('upcoming')" id="tab-upcoming">🔵 Upcoming <span class="tab-count" id="cnt-upcoming">—</span></button>
+      <button class="status-tab tab-open"            onclick="setTab('open')"    id="tab-open">🟢 Open Now <span class="tab-count" id="cnt-open">—</span></button>
+      <button class="status-tab tab-closed"          onclick="setTab('closed')"  id="tab-closed">🟠 Closed <span class="tab-count" id="cnt-closed">—</span></button>
+      <button class="status-tab tab-listed"          onclick="setTab('listed')"  id="tab-listed">🟣 Listed <span class="tab-count" id="cnt-listed">—</span></button>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="card filter-bar-card">
+      <div class="filter-bar">
+        <div class="filter-search-wrap">
+          <input type="text" id="search-input" placeholder="🔍 Search IPO name..." class="filter-search-input"
+            oninput="debounceLoad()" />
+        </div>
+        <select id="sector-filter" class="filter-select" onchange="loadListings()">
+          <option value="">All Sectors</option>
+        </select>
+        <select id="lgc-filter" class="filter-select" onchange="loadListings()">
+          <option value="">All Gain Categories</option>
+        </select>
+        <select id="prob-filter" class="filter-select" onchange="loadListings()">
+          <option value="">All Probabilities</option>
+          <option value="high">🟢 High (≥70%)</option>
+          <option value="medium">🟡 Medium (45–70%)</option>
+          <option value="low">🔴 Low (&lt;45%)</option>
+        </select>
+        <select id="sort-select" class="filter-select" onchange="loadListings()">
+          <option value="prob_desc">Highest Probability</option>
+          <option value="sub_desc">Highest Subscription</option>
+          <option value="newest">Newest IPOs</option>
+          <option value="oldest">Oldest IPOs</option>
+          <option value="price_desc">Price: High → Low</option>
+          <option value="price_asc">Price: Low → High</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Results count -->
+    <div class="listings-meta" id="listings-meta">Loading IPOs...</div>
+
+    <!-- IPO Cards Grid -->
+    <div class="listings-grid" id="listings-grid">
+      <div class="listings-loading">
+        <div class="loader"></div>
+        <span>Loading IPO listings...</span>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination"></div>
+
+  </div>
+
+  <!-- IPO Detail Modal -->
+  <div class="modal-overlay" id="detail-modal" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modal-content">
+        <div class="listings-loading">
+          <div class="loader"></div><span>Loading...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/listings.js"></script>
+  <script src="/static/script.js"></script>
+</body>
+
+</html>

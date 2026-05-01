@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>IPO Success Predictor – Home</title>
+  <meta name="description"
+    content="Predict IPO success probability using machine learning and historical IPO trends. AI-powered analysis of QIB, HNI, RII subscription data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+
+  {% include "navbar.html" %}
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% for cat, msg in messages %}
+  <div class="flash flash-{{ cat }}">{{ msg }}</div>
+  {% endfor %}
+  {% endwith %}
+
+  <div class="container">
+
+    <!-- Hero -->
+    <header>
+      <h1>IPO Success Predictor</h1>
+      <p>Predict IPO success probability using machine learning and historical IPO trends.</p>
+      <div style="margin-top:28px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="/predictor" class="hero-btn hero-btn-primary">🔍 Try Predictor</a>
+        <a href="/listings" class="hero-btn hero-btn-secondary">📋 Explore IPO Listings</a>
+        <a href="/dashboard" class="hero-btn hero-btn-secondary">📊 View Dashboard</a>
+      </div>
+    </header>
+
+
+
+    <!-- What is an IPO? -->
+    <div class="card">
+      <h2><span class="dot"></span>What is an IPO?</h2>
+      <p class="info-text">An <strong>Initial Public Offering (IPO)</strong> is when a private company offers its shares
+        to the public for the first time on a stock exchange. It allows the company to raise capital from public
+        investors while giving ordinary people the opportunity to participate in a company's growth story.</p>
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="info-icon">🏦</div>
+          <h3>Issue Size</h3>
+          <p>Total money a company plans to raise from the IPO in crores (₹ Cr).</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">💰</div>
+          <h3>Offer Price</h3>
+          <p>The price at which shares are offered to investors before listing on exchange.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">📈</div>
+          <h3>Subscription</h3>
+          <p>How many times the IPO was subscribed — higher means more investor demand.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">🏛️</div>
+          <h3>QIB</h3>
+          <p>Qualified Institutional Buyers — banks, mutual funds, insurance companies.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">💼</div>
+          <h3>HNI</h3>
+          <p>High Net-worth Individuals — wealthy investors applying for large lots.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">👥</div>
+          <h3>RII</h3>
+          <p>Retail Individual Investors — general public applying for small lots (up to ₹2 lakh).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Why IPO Prediction Matters -->
+    <div class="card">
+      <h2><span class="dot"></span>Why IPO Prediction Matters</h2>
+      <p class="info-text">Every year, hundreds of IPOs are listed on Indian exchanges. Not all deliver gains on listing
+        day. Predicting IPO success helps investors make smarter decisions:</p>
+      <ul class="info-list">
+        <li>🎯 Retail investors make <strong>informed decisions</strong> before applying to avoid losses</li>
+        <li>📉 Identify IPOs with high risk of listing below offer price before committing capital</li>
+        <li>🤖 Use <strong>data-driven insights</strong> based on subscription patterns instead of speculation</li>
+        <li>📊 Understand institutional confidence through QIB, HNI, and RII subscription analysis</li>
+        <li>🔮 Leverage historical patterns using machine learning to predict future performance</li>
+      </ul>
+    </div>
+
+    <!-- How the System Works -->
+    <div class="card">
+      <h2><span class="dot"></span>How the Prediction System Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <strong>Input IPO Data</strong>
+            <p>Enter the IPO name and offer price. Our system auto-fills subscription data (QIB, HNI, RII) from our
+              database of 560+ IPOs.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <strong>Feature Extraction</strong>
+            <p>The system extracts 6 key features: Issue Size, Offer Price, QIB, HNI, RII, and Total Subscription for
+              model input.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <strong>Logistic Regression Model</strong>
+            <p>Our trained model (84%+ accuracy) processes the scaled features and computes success/failure
+              probabilities.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div>
+            <strong>Result &amp; Insights</strong>
+            <p>Get a detailed result: prediction, probability, confidence level, risk level, recommendation, and smart
+              insights.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Factors -->
+    <div class="card">
+      <h2><span class="dot"></span>Key Factors Affecting IPO Success</h2>
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="info-icon">🏛️</div>
+          <h3>QIB Subscription</h3>
+          <p>High institutional interest (10×+) is the strongest positive signal. Institutions do deep due diligence
+            before investing.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">📊</div>
+          <h3>Total Subscription</h3>
+          <p>Overall demand vs. supply. An IPO subscribed 30× or more typically lists with a listing gain.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">💹</div>
+          <h3>Sector Performance</h3>
+          <p>IPOs in high-growth sectors like Technology, Pharma, and Finance tend to perform better.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">💰</div>
+          <h3>Offer Price Band</h3>
+          <p>Lower-priced IPOs attract more retail participation. Very high prices can reduce demand.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">📏</div>
+          <h3>Issue Size</h3>
+          <p>Smaller issues tend to list at higher premiums due to limited supply vs. high demand.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">📅</div>
+          <h3>Market Conditions</h3>
+          <p>Bull markets see more successful IPOs. Macro conditions, interest rates, and sentiment matter.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Recommended IPOs -->
+    <div class="card">
+      <h2><span class="dot"></span>Top Recommended IPOs</h2>
+      <p class="info-text" style="margin-bottom:18px;">Highest predicted success probability from our database — based
+        on ML model analysis.</p>
+      <div class="ipo-card-grid">
+        {% for ipo in top_ipos %}
+        <div class="ipo-mini-card">
+          <div class="ipo-mini-header">
+            <span class="ipo-mini-name">{{ ipo.name }}</span>
+            <span
+              class="prob-badge prob-{{ 'high' if ipo.success_prob >= 0.7 else ('mid' if ipo.success_prob >= 0.45 else 'low') }}">
+              {{ (ipo.success_prob * 100)|round(1) }}%
+            </span>
+          </div>
+          <div class="ipo-mini-meta">
+            <span>{{ ipo.sector }}</span>
+            <span>₹{{ ipo.offer_price }}</span>
+          </div>
+          <div class="ipo-mini-sub">
+            <span>Sub: {{ ipo.total_sub }}×</span>
+            <span class="lgc-tag">{{ ipo.listing_gain_cat[:10] }}...</span>
+          </div>
+          <a href="/listings" class="ipo-mini-btn">View Details</a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Most Subscribed IPOs -->
+    <div class="card">
+      <h2><span class="dot"></span>Most Subscribed IPOs</h2>
+      <p class="info-text" style="margin-bottom:18px;">IPOs with the highest total subscription across all investor
+        categories.</p>
+      <div class="ipo-card-grid">
+        {% for ipo in most_subscribed %}
+        <div class="ipo-mini-card">
+          <div class="ipo-mini-header">
+            <span class="ipo-mini-name">{{ ipo.name }}</span>
+            <span
+              class="prob-badge prob-{{ 'high' if ipo.success_prob >= 0.7 else ('mid' if ipo.success_prob >= 0.45 else 'low') }}">
+              {{ (ipo.success_prob * 100)|round(1) }}%
+            </span>
+          </div>
+          <div class="ipo-mini-meta">
+            <span>{{ ipo.sector }}</span>
+            <span>₹{{ ipo.offer_price }}</span>
+          </div>
+          <div class="ipo-mini-sub">
+            <span class="sub-highlight">{{ ipo.total_sub }}× subscribed</span>
+          </div>
+          <a href="/listings" class="ipo-mini-btn">View Details</a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Recent IPO Activity -->
+    <div class="card">
+      <h2><span class="dot"></span>Recent IPO Activity</h2>
+      <div class="recent-table-wrap">
+        <table class="recent-table">
+          <thead>
+            <tr>
+              <th>IPO Name</th>
+              <th>Sector</th>
+              <th>Offer Price</th>
+              <th>Listing Date</th>
+              <th>Gain Category</th>
+              <th>Prediction</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for ipo in recent_ipos %}
+            <tr>
+              <td><strong>{{ ipo.name }}</strong></td>
+              <td><span class="sector-tag">{{ ipo.sector }}</span></td>
+              <td>₹{{ ipo.offer_price }}</td>
+              <td>{{ ipo.listing_date }}</td>
+              <td><span class="lgc-inline">{{ ipo.listing_gain_cat }}</span></td>
+              <td>
+                {% if ipo.predicted_success %}
+                <span class="pred-success">✅ Success</span>
+                {% else %}
+                <span class="pred-fail">❌ Fail</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div style="text-align:center;margin-top:18px;">
+        <a href="/listings" class="btn-outline" style="text-decoration:none;display:inline-block;">View All IPO Listings
+          →</a>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+
+  <script src="/static/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>IPO Predictor – Predict IPO Success</title>
+  <meta name="description"
+    content="Predict IPO listing success using AI. Enter IPO name to auto-fill data and get instant prediction with probability, risk level and insights." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+
+  {% include "navbar.html" %}
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% for cat, msg in messages %}
+  <div class="flash flash-{{ cat }}">{{ msg }}</div>
+  {% endfor %}
+  {% endwith %}
+
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <h1>IPO Success Predictor</h1>
+      <p>Enter the IPO name to auto-fill data, or manually enter subscription details to predict listing success.</p>
+    </header>
+
+    <!-- IPO Name Lookup Card -->
+    <div class="card">
+      <h2><span class="dot"></span>Search IPO</h2>
+      <div class="ipo-search-wrap">
+        <div class="form-group" style="flex:1;">
+          <label for="ipo_name_input">IPO Name</label>
+          <div style="position:relative;">
+            <input type="text" id="ipo_name_input" placeholder="Type IPO name to search and auto-fill..."
+              autocomplete="off" />
+            <div class="ipo-suggestions" id="ipo-suggestions"></div>
+          </div>
+        </div>
+        <div class="form-group" style="width:180px;">
+          <label for="quick_price">Offer Price (₹)</label>
+          <input type="number" id="quick_price" placeholder="e.g. 350" min="0" step="any" />
+        </div>
+      </div>
+      <div id="autofill-status" class="autofill-msg" style="display:none;"></div>
+      <button class="btn-outline" id="manual-toggle-btn" onclick="toggleManualEntry()"
+        style="margin-top:14px;display:inline-block;cursor:pointer;font-size:.85rem;">
+        ✏️ Enter Details Manually
+      </button>
+    </div>
+
+    <!-- IPO Details Card -->
+    <div class="card" id="details-card">
+      <h2><span class="dot"></span>IPO Details</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="Issue_Size">Issue Size (₹ Cr)</label>
+          <input type="number" id="Issue_Size" placeholder="e.g. 1500" min="0" step="any" />
+        </div>
+        <div class="form-group">
+          <label for="Offer_Price">Offer Price (₹)</label>
+          <input type="number" id="Offer_Price" placeholder="e.g. 250" min="0" step="any" />
+        </div>
+        <div class="form-group">
+          <label for="QIB">QIB Subscription (×)</label>
+          <input type="number" id="QIB" placeholder="e.g. 10.5" min="0" step="any" />
+        </div>
+        <div class="form-group">
+          <label for="HNI">HNI Subscription (×)</label>
+          <input type="number" id="HNI" placeholder="e.g. 25.3" min="0" step="any" />
+        </div>
+        <div class="form-group">
+          <label for="RII">RII Subscription (×)</label>
+          <input type="number" id="RII" placeholder="e.g. 7.2" min="0" step="any" />
+        </div>
+        <div class="form-group">
+          <label for="Total">Total Subscription (×)</label>
+          <input type="number" id="Total" placeholder="e.g. 43.0" min="0" step="any" />
+        </div>
+      </div>
+      <button class="btn-predict" id="predict-btn" onclick="predictIPO()">
+        🔍 Predict IPO Success
+      </button>
+      <div id="error-msg"></div>
+    </div>
+
+    <!-- Result Card -->
+    <div class="card" id="result-card">
+
+      <h2><span class="dot"></span>Prediction Result</h2>
+
+      <!-- Verdict -->
+      <div class="result-header">
+        <div class="result-icon" id="result-icon">🚀</div>
+        <div>
+          <div class="result-label" id="result-label">IPO Success</div>
+          <div class="result-sub" id="result-sub"></div>
+        </div>
+      </div>
+
+      <!-- Probability bars row -->
+      <div class="dual-prob-row">
+        <div class="prob-section">
+          <div class="prob-header">
+            <span class="prob-title">Success Probability</span>
+            <span class="prob-value" id="prob-value">—</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+        </div>
+        <div class="prob-section">
+          <div class="prob-header">
+            <span class="prob-title">Failure Probability</span>
+            <span class="prob-value prob-fail-val" id="fail-value">—</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill-fail" id="progress-fail"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Score + Risk + Confidence -->
+      <div class="score-risk-row three-col">
+        <div class="score-box">
+          <span class="score-label">IPO Score</span>
+          <span class="score-value" id="ipo-score">—</span>
+          <span class="score-sub">out of 100</span>
+        </div>
+        <div class="risk-box" id="risk-box">
+          <span class="risk-label">Risk Level</span>
+          <span class="risk-badge" id="risk-badge">—</span>
+          <span class="risk-desc" id="risk-desc">—</span>
+        </div>
+        <div class="score-box">
+          <span class="score-label">Confidence</span>
+          <span class="conf-badge" id="conf-badge">—</span>
+          <span class="score-sub" id="conf-sub">—</span>
+        </div>
+      </div>
+
+      <!-- Recommendation -->
+      <div class="recommendation-bar" id="recommendation-bar">
+        <span class="rec-icon" id="rec-icon">📌</span>
+        <span class="rec-text" id="rec-text">—</span>
+      </div>
+
+      <!-- Charts row: donut + bar -->
+      <div class="charts-result-row">
+        <div>
+          <h2 style="margin-bottom:12px;"><span class="dot"></span>Success vs Failure</h2>
+          <div style="position:relative;height:220px;max-width:220px;margin:0 auto;">
+            <canvas id="donutChart"></canvas>
+          </div>
+        </div>
+        <div style="flex:1;">
+          <h2 style="margin-bottom:12px;"><span class="dot"></span>Subscription Breakdown</h2>
+          <div id="chart-wrap" style="height:220px;">
+            <canvas id="subscriptionChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Why This Prediction? -->
+      <div class="insights-card" id="insights-card">
+        <h3 class="insights-title">💡 Why This Prediction?</h3>
+        <ul class="insights-list" id="insights-list"></ul>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-btns">
+        <button class="btn-action btn-action-primary" onclick="resetPredictor()">🔄 Predict Another</button>
+        <a href="/dashboard" class="btn-action btn-action-sec">📊 View Dashboard</a>
+        <a href="/listings" class="btn-action btn-action-sec">📋 View Listings</a>
+        {% if user %}
+        <a href="/history" class="btn-action btn-action-sec">🕘 My History</a>
+        {% endif %}
+      </div>
+
+    </div><!-- /result card -->
+
+  </div><!-- /container -->
+
+  <script src="/static/script.js"></script>
+</body>
+
+</html>

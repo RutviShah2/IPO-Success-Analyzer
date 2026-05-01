@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Sign Up – IPO Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+{% include "navbar.html" %}
+
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-logo">📈</div>
+    <h2 class="auth-title">Create Account</h2>
+    <p class="auth-sub">Start predicting IPO success today</p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for cat, msg in messages %}
+        <div class="flash flash-{{ cat }}">{{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
+
+    <form method="POST" action="/signup" autocomplete="off">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Your full name"/>
+      </div>
+      <div class="form-group" style="margin-top:16px;">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Choose a username" required/>
+      </div>
+      <div class="form-group" style="margin-top:16px;">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com" required/>
+      </div>
+      <div class="form-group" style="margin-top:16px;">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Min 6 characters" required/>
+      </div>
+      <div class="form-group" style="margin-top:16px;">
+        <label for="confirm">Confirm Password</label>
+        <input type="password" id="confirm" name="confirm" placeholder="Repeat password" required/>
+      </div>
+      <button type="submit" class="btn-predict" style="margin-top:22px;">Create Account</button>
+    </form>
+
+    <p class="auth-footer">Already have an account? <a href="/login">Login</a></p>
+  </div>
+</div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>About – IPO Success Predictor</title>
+  <meta name="description"
+    content="Learn about the IPO Success Predictor — what it is, what it does, and how you can use it to make smarter investment decisions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+
+<body>
+
+  {% include "navbar.html" %}
+
+  <div class="container">
+    <header>
+      <h1>About IPO Success Predictor</h1>
+      <p>A smart tool that helps you decide which IPOs are worth applying to — before listing day.</p>
+    </header>
+
+    <!-- What is this website -->
+    <div class="card">
+      <h2><span class="dot"></span>What is This Website?</h2>
+      <p class="info-text">
+        The <strong>IPO Success Predictor</strong> is a web application that uses historical IPO data and
+        artificial intelligence to predict whether an upcoming IPO will list at a gain or a loss on the
+        stock exchange.
+      </p>
+      <p class="info-text" style="margin-top:14px;">
+        Every year, thousands of investors apply to IPOs hoping for a listing gain — but many end up
+        losing money because they rely on hype rather than data. This website changes that by giving you
+        a clear, data-driven prediction before you invest.
+      </p>
+    </div>
+
+    <!-- What can you do -->
+    <div class="card">
+      <h2><span class="dot"></span>What Can You Do Here?</h2>
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="info-icon">🔍</div>
+          <h3>Predict IPO Success</h3>
+          <p>Enter or search for an IPO and get an instant prediction — Success or Fail — along with a confidence score
+            and risk level.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">📋</div>
+          <h3>Browse IPO Listings</h3>
+          <p>Explore 560+ IPOs from our database. Filter by sector, listing gain category, or sort by subscription
+            strength.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">📊</div>
+          <h3>View Analytics Dashboard</h3>
+          <p>See sector-wise performance, most subscribed IPOs, and success trends through interactive charts.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">🕘</div>
+          <h3>Track Your History</h3>
+          <p>All your predictions are saved automatically. Review past results, compare IPOs, and re-run any prediction
+            at any time.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">💡</div>
+          <h3>Get Smart Insights</h3>
+          <p>Every prediction comes with a plain-English explanation of why the IPO is likely to succeed or fail — no
+            guesswork.</p>
+        </div>
+        <div class="info-box">
+          <div class="info-icon">🔐</div>
+          <h3>Personal Account</h3>
+          <p>Create a free account to save predictions, access your history, and get personalized IPO recommendations.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to use -->
+    <div class="card">
+      <h2><span class="dot"></span>How to Use the Predictor</h2>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">1</span>
+          <div>
+            <strong>Sign Up &amp; Log In</strong>
+            <p>Create a free account to access the predictor and save your results.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">2</span>
+          <div>
+            <strong>Search for an IPO</strong>
+            <p>Go to the Predictor page and type the IPO name in the search box. The website will auto-fill all the
+              relevant data for you.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">3</span>
+          <div>
+            <strong>Click Predict</strong>
+            <p>Hit the "Predict IPO Success" button to instantly get your result — along with probability, risk level,
+              confidence, and insights.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">4</span>
+          <div>
+            <strong>Review &amp; Decide</strong>
+            <p>Use the prediction and insights to make a more informed decision before applying to the IPO.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Who is this for -->
+    <div class="card">
+      <h2><span class="dot"></span>Who is This For?</h2>
+      <ul class="info-list">
+        <li>🧑‍💼 <strong>Retail investors</strong> who want to apply to IPOs smartly and avoid listing losses</li>
+        <li>📱 <strong>First-time investors</strong> who are new to IPOs and want guidance on what to apply for</li>
+        <li>📈 <strong>Regular traders</strong> who want a quick data-backed view before making a decision</li>
+        <li>🎓 <strong>Students &amp; researchers</strong> interested in how AI is applied to financial prediction</li>
+      </ul>
+    </div>
+
+    <!-- CTA -->
+    <div class="card" style="text-align:center; padding:36px 28px;">
+      <h2 style="justify-content:center; margin-bottom:14px;"><span class="dot"></span>Ready to Try It?</h2>
+      <p class="info-text" style="margin-bottom:24px;">Start predicting IPO success in seconds — no finance background
+        needed.</p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="/predictor" class="hero-btn hero-btn-primary">🔍 Try the Predictor</a>
+        <a href="/listings" class="hero-btn hero-btn-secondary">📋 Browse IPO Listings</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<nav class="navbar">
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">&#128200; IPO Predictor</a>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/"          class="nav-link {% if request.path=='/' %}active{% endif %}">Home</a></li>
+      <li><a href="/predictor" class="nav-link {% if request.path=='/predictor' %}active{% endif %}">Predictor</a></li>
+      <li><a href="/listings"  class="nav-link {% if request.path=='/listings' %}active{% endif %}">Listings</a></li>
+      <li><a href="/dashboard" class="nav-link {% if request.path=='/dashboard' %}active{% endif %}">Dashboard</a></li>
+      <li><a href="/about"     class="nav-link {% if request.path=='/about' %}active{% endif %}">About</a></li>
+      {% if user %}
+        <li><a href="/history" class="nav-link {% if request.path=='/history' %}active{% endif %}">History</a></li>
+        <li class="nav-user">&#128100; {{ user }}</li>
+        <li><a href="/logout" class="nav-btn nav-btn-out">Logout</a></li>
+      {% else %}
+        <li><a href="/login" class="nav-btn">Login</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
