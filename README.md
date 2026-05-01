@@ -109,7 +109,7 @@ There is no free, simple, data-driven tool for retail investors to predict IPO p
 ## 📁 Folder Structure
 
 ```
-SGP/
+IPO-Success-Analyzer/
 ├── app.py                    # Main Flask application + all routes
 ├── model_training.py         # Model training script
 ├── dataset.csv               # Historical IPO dataset (5000 records)
@@ -277,7 +277,7 @@ The Dashboard (`/dashboard`) renders **12 Chart.js charts** using live data from
 
 ```bash
 git clone https://github.com/your-username/ipo-success-predictor.git
-cd ipo-success-predictor/SGP
+cd IPO-Success-Analyzer
 ```
 
 ### 2. Create a virtual environment (recommended)
@@ -312,7 +312,7 @@ Ensure these files are present:
 ## ▶️ How to Run Locally
 
 ```bash
-# From the SGP directory
+# From the project root
 python app.py
 ```
 
